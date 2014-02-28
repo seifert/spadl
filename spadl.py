@@ -1,3 +1,10 @@
+"""
+SPADL - Sane Python adapter to DbgLog
+
+Allows to log using standard Python logging to DbgLog
+(http://dbglog.sourceforge.net/).
+
+"""
 
 import logging
 
@@ -35,6 +42,8 @@ def configure(severity=1, level=None, format=BASIC_FORMAT, datefmt=None):
 
     :param severity: int or dict, for the `DbgLogHandler` constructor
     :param level: sets level of the root logger if not None
+    :param format: given to the handler's formatter
+    :param datefmt: given to the handler's formatter
 
     """
     handler = DbgLogHandler(severity)
@@ -49,6 +58,12 @@ def configure(severity=1, level=None, format=BASIC_FORMAT, datefmt=None):
 class DbgLogHandler(logging.Handler):
     """
     A handler class which writes logging records to DbgLog.
+
+    :param severity: A dictionary mapping logger names to severities
+            (numbers 1-4 inclusive, use 0 for ignoring specific logger).
+            Alternatively an integer number can be given and it will
+            be used as default severity for all loggers.
+
     """
 
     def __init__(self, severity):
