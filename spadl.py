@@ -19,6 +19,27 @@ DBG_LOG_LEVELS = {
 }
 
 
+def configure(severity=1, level=None):
+    """
+    Configure Python logging to write to DbgLog.
+
+    This function adds a configured `DbgLogHandler` to the root logger.
+    It can be used as a shortcut in common cases when detailed
+    configuration is not necessary.
+
+    Note that this method does not configure DbgLog itself.
+
+    :param severity: int or dict, for the `DbgLogHandler` constructor
+    :param level: sets level of the root logger if not None
+
+    """
+    handler = DbgLogHandler(severity)
+    root = logging.getLogger()
+    root.addHandler(handler)
+    if level is not None:
+        root.setLevel(level)
+
+
 class DbgLogHandler(logging.Handler):
     """
     A handler class which writes logging records to DbgLog.
