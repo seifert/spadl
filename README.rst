@@ -15,6 +15,19 @@ time utilize DbgLog.
 .. _DbgLog: http://dbglog.sourceforge.net/
 
 
+Installation
+------------
+
+SPADL can be installed using PIP (or easy_install from PYPI): ::
+
+    $ pip install spadl
+
+Alternatively you can download and extract tarball and install the package manually: ::
+
+    $ python setup.py install
+
+Placing the package somewhere on the PYTHONPATH should also work.
+
 
 Example usage
 -------------
@@ -57,3 +70,5 @@ function can be similar to: ::
            'app.request': 3,
            'rpc': 2,
            '': 1},)
+
+See (and run) `example.py` for the working example.
