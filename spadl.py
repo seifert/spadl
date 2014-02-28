@@ -108,14 +108,21 @@ class DbgLogHandler(logging.Handler):
         """
         severities = self.severities
         name = record.name or 'root'
-        while True:
+        try:
+            return severities[name]
+        except KeyError:
+            pass
+        prefix = name
+        while prefix:
             try:
-                return severities[name]
-            except KeyError:
-                pass
-            try:
-                name = name[:name.rindex('.')]
+                prefix = prefix[:prefix.rindex('.')]
             except ValueError:
-                if not name:
-                    return 0
-                name = ''
+                prefix = ''
+            try:
+                severity = severities[prefix]
+            except KeyError:
+                continue
+            else:
+                severities[name] = severity
+                return severity
+        return 0
