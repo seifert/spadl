@@ -60,12 +60,19 @@ class DbgLogHandler(logging.Handler):
 
         """
         try:
-            level = self.getDbgLogLevel(record)
             severity = self.getDbgLogSeverity(record)
-            if level > 0 and severity > 0:
-                msg = self.format(record)
-                location = (record.filename, record.funcName, record.lineno)
-                dbg.log(msg, location=location, **{level: severity})
+            if not severity > 0:
+                return
+            level = self.getDbgLogLevel(record)
+            if not level > 0:
+                return
+            kwargs = {level: severity}
+            # Do not format message if it wont be logged.
+            if not dbg.checkLevel(**kwargs):
+                return
+            msg = self.format(record)
+            location = (record.filename, record.funcName, record.lineno)
+            dbg.log(msg, location=location, **kwargs)
         except (KeyboardInterrupt, SystemExit):
             raise
         except:
