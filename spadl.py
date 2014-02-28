@@ -18,8 +18,12 @@ DBG_LOG_LEVELS = {
     logging.FATAL: FATAL,
 }
 
+# Default format
+# It contains only information which is not present in DbgLog output.
+BASIC_FORMAT = '%(name)s: %(message)s'
 
-def configure(severity=1, level=None):
+
+def configure(severity=1, level=None, format=BASIC_FORMAT, datefmt=None):
     """
     Configure Python logging to write to DbgLog.
 
@@ -34,6 +38,8 @@ def configure(severity=1, level=None):
 
     """
     handler = DbgLogHandler(severity)
+    formatter = logging.Formatter(format, datefmt)
+    handler.setFormatter(formatter)
     root = logging.getLogger()
     root.addHandler(handler)
     if level is not None:
