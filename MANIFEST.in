@@ -1,1 +1,1 @@
-include README.rst test.py example.py
+include README.rst LICENSE test.py example.py
