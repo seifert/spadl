@@ -1,7 +1,6 @@
+#!/usr/bin/env python
 
-import io
 from setuptools import setup
-
 
 VERSION = (0, 1)
 VERSION_STR = ".".join(map(str, VERSION))
@@ -10,7 +9,7 @@ VERSION_STR = ".".join(map(str, VERSION))
 url='https://github.com/mila/spadl'
 
 try:
-    long_description = io.open('README.rst', "tr", encoding="utf-8").read()
+    long_description = open('README.rst').read().decode('utf-8')
 except IOError:
     long_description = "See %s" % url
 
