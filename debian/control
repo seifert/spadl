@@ -1,0 +1,18 @@
+Source: python-spadl
+Section: python
+Priority: extra
+Maintainer: Miloslav Pojman <miloslav.pojman@firma.seznam.cz>
+Build-Depends: debhelper (>= 7.0.50~), python (>= 2.6.6-3)
+Standards-Version: 3.9.1
+Homepage: https://github.com/mila/spadl
+Vcs-Git: https://github.com/mila/spadl.git
+Vcs-Browser: https://github.com/mila/spadl
+X-Python-Version: >= 2.6
+
+
+Package: python-spadl
+Architecture: all
+Depends: python (>= 2.6), python-dbglog (>=1.7.5), ${misc:Depends}
+Description: Sane Python adapter to DbgLog
+ This package provides a standard logging handler which writes
+ log records to DbgLog.
