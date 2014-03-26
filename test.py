@@ -67,6 +67,7 @@ class DbgLogHandlerTestCase(unittest.TestCase):
         self.assertTrue(re.search(pattern, content),
                         'Message %r was not found in log.' % message)
 
+
     def assertNoLogMessage(self, message, level=None):
         content = self.readLogFile()
         pattern = self.getMessagePattern(message, level)
@@ -252,6 +253,31 @@ class DbgLogHandlerTestCase(unittest.TestCase):
         self.addHandler({'foo.bar': 4, 'foo': 3, '': 2})
         logging.getLogger('foooo').info('Example message')
         self.assertLogMessage('Example message', 'I2')
+
+    def testMessageWithParams(self):
+        self.addHandler()
+        logging.info('"%s %s"', 'hello', 'world')
+        self.assertLogMessage('"hello world"')
+
+    def testMessageWithNamedParams(self):
+        self.addHandler()
+        logging.info('"%(h)s %(w)s"', {'h':'hello', 'w': 'world'})
+        self.assertLogMessage('"hello world"')
+
+    def testMessageWithPercentSign(self):
+        self.addHandler()
+        logging.info('"100%"')
+        self.assertLogMessage('"100%"')
+
+    def testMessageWithPercentSignAndParams(self):
+        self.addHandler()
+        logging.info('"100%% %s %s"', 'hello', 'world')
+        self.assertLogMessage('"100% hello world"')
+
+    def testMessageWithPercentSignAndNamedParams(self):
+        self.addHandler()
+        logging.info('"100%% %(h)s %(w)s"', {'h':'hello', 'w': 'world'})
+        self.assertLogMessage('"100% hello world"')
 
 
 if __name__ == '__main__':

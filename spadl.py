@@ -91,7 +91,8 @@ class DbgLogHandler(logging.Handler):
             # Do not format message if it wont be logged.
             if not dbg.checkLevel(**kwargs):
                 return
-            msg = self.format(record)
+            # The message is already formated, prevent formatting by DbgLog
+            msg = self.format(record).replace('%', '%%')
             location = (record.filename, record.funcName, record.lineno)
             dbg.log(msg, location=location, **kwargs)
         except (KeyboardInterrupt, SystemExit):
