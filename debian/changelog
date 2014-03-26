@@ -1,8 +1,8 @@
 python-spadl (0.2) unstable; urgency=low
 
-  * UNRELEASED
+  * Fix error when logging messages with a percent sign.
 
- -- Miloslav Pojman <miloslav.pojman@firma.seznam.cz>  Wed, 26 Mar 2014 18:17:13 +0100
+ -- Miloslav Pojman <miloslav.pojman@firma.seznam.cz>  Wed, 26 Mar 2014 18:21:58 +0100
 
 python-spadl (0.1) unstable; urgency=low
 
