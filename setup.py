@@ -2,7 +2,7 @@
 
 from setuptools import setup
 
-VERSION = (0, 1)
+VERSION = (0, 2)
 VERSION_STR = ".".join(map(str, VERSION))
 
 
