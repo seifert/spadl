@@ -5,7 +5,7 @@ SPADL - Sane Python adapter to DbgLog
 This package provides a standard logging handler which writes log
 records to `DbgLog`_.
 
-You are not probably interested in this library unless you are
+You are probably not interested in this library unless you are
 working for Seznam.cz.
 
 A `spadl.DbgLogHandler` class implemented in this package allows you to use
@@ -18,7 +18,7 @@ time utilize DbgLog.
 Installation
 ------------
 
-SPADL can be installed using PIP (or easy_install from PYPI): ::
+SPADL can be installed using pip (or easy_install) from PYPI: ::
 
     $ pip install spadl
 
