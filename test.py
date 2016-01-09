@@ -49,7 +49,7 @@ class DbgLogHandlerTestCase(unittest.TestCase):
 
     def readLogFile(self):
         try:
-            with open(self.filename, 'rb') as f:
+            with open(self.filename, 'r') as f:
                 return f.read()
         except EnvironmentError as e:
             if e.errno == errno.ENOENT:
@@ -66,7 +66,6 @@ class DbgLogHandlerTestCase(unittest.TestCase):
         pattern = self.getMessagePattern(message, level)
         self.assertTrue(re.search(pattern, content),
                         'Message %r was not found in log.' % message)
-
 
     def assertNoLogMessage(self, message, level=None):
         content = self.readLogFile()
