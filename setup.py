@@ -1,15 +1,19 @@
 #!/usr/bin/env python
 
+import sys
 from setuptools import setup
 
 VERSION = (0, 3)
 VERSION_STR = ".".join(map(str, VERSION))
 
 
-url='https://github.com/mila/spadl'
+url = 'https://github.com/mila/spadl'
 
 try:
-    long_description = open('README.rst').read().decode('utf-8')
+    if sys.version_info >= (3,):
+        long_description = open('README.rst', 'rb').read().decode('utf-8')
+    else:
+        long_description = open('README.rst', 'r').read().decode('utf-8')
 except IOError:
     long_description = "See %s" % url
 

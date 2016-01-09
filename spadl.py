@@ -7,6 +7,7 @@ Allows to log using standard Python logging to DbgLog
 """
 
 import logging
+import sys
 
 from dbglog import dbg
 
@@ -24,6 +25,11 @@ DBG_LOG_LEVELS = {
     logging.ERROR: ERROR,
     logging.FATAL: FATAL,
 }
+
+if sys.version_info >= (3,):
+    INTEGER_TYPES = int
+else:
+    INTEGER_TYPES = (int, long)
 
 # Default format
 # It contains only information which is not present in DbgLog output.
@@ -68,7 +74,7 @@ class DbgLogHandler(logging.Handler):
 
     def __init__(self, severity):
         logging.Handler.__init__(self)
-        if isinstance(severity, (int, long)):
+        if isinstance(severity, INTEGER_TYPES):
             self.severities = {'': severity}
         else:
             self.severities = severity
@@ -85,7 +91,7 @@ class DbgLogHandler(logging.Handler):
             if not severity > 0:
                 return
             level = self.getDbgLogLevel(record)
-            if not level > 0:
+            if not level:
                 return
             kwargs = {level: severity}
             # Do not format message if it wont be logged.
@@ -105,14 +111,14 @@ class DbgLogHandler(logging.Handler):
         Returns name of DbgLog level.
 
         Maps a standard logging level set to a `logging.LogRecord`
-        instance to one of 'FATAL', 'ERR', 'WARN', 'INFO' and 'DBG'.
+        instance to one of 'FATAL', 'ERR', 'WARN', 'INFO', 'DBG' or ''.
 
         """
         level = record.levelno
         try:
             return DBG_LOG_LEVELS[level // 10 * 10]
         except KeyError:
-            return FATAL if level > logging.FATAL else 0
+            return FATAL if level > logging.FATAL else ''
 
     def getDbgLogSeverity(self, record):
         """
