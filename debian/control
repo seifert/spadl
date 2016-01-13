@@ -1,0 +1,29 @@
+Source: python-spadl
+Section: python
+Priority: extra
+Maintainer: Miloslav Pojman <miloslav.pojman@firma.seznam.cz>
+Uploaders: Jan Seifert <jan.seifert@firma.seznam.cz>
+Build-Depends: debhelper (>= 9.0), dh-python, python-all, python3-all, python-setuptools, python3-setuptools
+Standards-Version: 3.9.6
+Homepage: https://github.com/mila/spadl
+Vcs-Git: https://github.com/mila/spadl.git
+Vcs-Browser: https://github.com/mila/spadl
+X-Python-Version: >= 2.6
+X-Python3-Version: >= 3.4
+
+
+Package: python-spadl
+Architecture: all
+Depends: ${misc:Depends}, ${python:Depends}, python-dbglog (>=1.8.0)
+Description: Sane Python adapter to DbgLog
+ This package provides a standard logging handler which writes
+ log records to DbgLog.
+
+Package: python3-spadl
+Architecture: all
+Depends: ${misc:Depends}, ${python3:Depends}, python3-dbglog (>=1.8.0)
+Description: Sane Python adapter to DbgLog
+ This package provides a standard logging handler which writes
+ log records to DbgLog.
+ .
+ This package contains the Python 3 version of the library.
